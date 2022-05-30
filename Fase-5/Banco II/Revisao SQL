@@ -1,0 +1,18 @@
+IGOR RADTKE
+
+
+1- Select count(*) from actors a join content_actors c on a.actor_id=c.actor_id where content_id = 8;
+
+Select count(*) from actors a join content_actors c on a.actor_id=c.actor_id where content_id = 8;
+
+
+2- select title from contents where imdb_score > (select avg(imdb_score)from contents); 
+
+3- Select avg(imdb_score) from contents; 
+
+4- Select name.avg(c.imdb_score)as mean from content_directors cd join directors d on d.director_id = cd.director_id join contents c 
+on c.content_id = cd.content_id group  by d.name order by mean desc limit 3;
+
+5- select title from(select * from contents order by content_rating desc limit 10) top_10 limit 3;
+
+6- select release_dates from contents goup by release_dates haaving count(title) > 10;
