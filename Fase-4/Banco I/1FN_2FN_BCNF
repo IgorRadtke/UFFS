@@ -1,0 +1,98 @@
+1- DF = {AB -> CD, A -> B, B -> C, C -> E, BD -> A}
+   R = (A,B,C,D,E,G)
+   X = {G,A,B}
+	DF AB->CD => {G,A,B} ∈ X? SIM, X={G,A,B} U {C,D}
+	DF A -> B => {G,A,B} ∈ X? SIM, POREM JA ESTA INCLUSO
+	DF B -> C = SIM, NAO INCLUI POSI JA TEM
+	DF C -> E = SIM, INCLUI O E X={G,A,B,C,D,E}
+	DF BD -> A = SIM, POREM JA ESTA INCLUSO X={G,A,B,C,D,E}
+	
+	DF AB->CD => {G,A,B} ∈ X? SIM, JA ESTA INCLUSO X={G,A,B,C,D,E}
+	DF A -> B => {G,A,B} ∈ X? SIM, JA ESTA INCLUSO X={G,A,B,C,D,E}
+	DF B -> C =  {G,A,B} ∈ X? SIM, JA ESTA INCLUSO X={G,A,B,C,D,E}
+	DF C -> E =  {G,A,B} ∈ X? SIM, JA ESTA INCLUSO X={G,A,B,C,D,E}
+	DF BD -> A = {G,A,B} ∈ X? SIM, JA ESTA INCLUSO X={G,A,B,C,D,E}
+	PAROU DE CRESCER, ACABOU.
+----------------------------------------------------------------------------
+   X={G,A}
+   	DF AB->CD => {G,A} ∈ X? NAO
+	DF A -> B => {G,A} ∈ X? SIM, INCLUI B X={G,A,B}
+	DF B -> C => {G,A} ∈ X? SIM, INCLUI C X={G,A,B,C}
+	DF C -> E => {G,A} ∈ X? SIM, INCLUI E X={G,A,B,C,E}
+	DF BD -> A => {G,A} ∈ X? NAO
+	
+   	DF AB->CD => {G,A} ∈ X? SIM, INCLUI D POIS C JA ESTA INCLUSP X={G,A,B,C,E,D}
+	DF A -> B => {G,A} ∈ X? SIM, JA ESTA INCLUSO
+	DF B -> C => {G,A} ∈ X? SIM, JA ESTA INCLUSO
+	DF C -> E => {G,A} ∈ X? SIM, JA ESTA INCLUSO
+	DF BD -> A => {G,A} ∈ X? SIM, JA ESTA INCLUSO
+	
+   	DF AB->CD => {G,A} ∈ X? SIM, JA ESTA INCLUSO
+	DF A -> B => {G,A} ∈ X? SIM, JA ESTA INCLUSO
+	DF B -> C => {G,A} ∈ X? SIM, JA ESTA INCLUSO
+	DF C -> E => {G,A} ∈ X? SIM, JA ESTA INCLUSO
+	DF BD -> A => {G,A} ∈ X? SIM, JA ESTA INCLUSO
+	DENTRO DE UM CICLO TODO PAROU DE CRESCER, ACHOU A CHAVE X={G,A}
+----------------------------------------------------------------------------
+   X={G,B,D}
+   	DF AB->CD => {G,B,D} ∈ X? NAO
+	DF A -> B => {G,B,D} ∈ X? NAO
+	DF B -> C => {G,B,D} ∈ X? SIM, INCLUI C X={G,B,D,C}
+	DF C -> E => {G,B,D} ∈ X? SIM, INCLUI E X={G,B,D,C,E}
+	DF BD -> A => {G,B,D} ∈ X? SIM, INCLUI A X={G,B,D,C,E,A}
+	
+   	DF AB->CD => {G,B,D} ∈ X? JA ESTA INCLUSO
+	DF A -> B => {G,B,D} ∈ X? JA ESTA INCLUSO
+	DF B -> C => {G,B,D} ∈ X? JA ESTA INCLUSO
+	DF C -> E => {G,B,D} ∈ X? JA ESTA INCLUSO
+	DF BD -> A => {G,B,D} ∈ X? JA ESTA INCLUSO	
+	DENTRO DE UM CICLO TODO PAROU DE CRESCER, ACHOU A CHAVE X={G,B,D}
+------------------------------------------------------------------------------
+2 - *1FN*					{ COMPRA(numnf, codc, nomc, codv, nomv, dtcomp)
+COMPRA							numnf -> codc comc codv nomv dtcomp
+    NUMNF| CODC | CODV | NOMC | NOMV | DTCOMP |		codc -> nomc
+       5 |  11  |  33  | Onze |  Zé  |07/07/12|		codv -> nomv }
+       5 |  11  |  33  | Onze |  Zé  |07/07/12|		
+     111 |  17  |  05  | João |Maria |10/07/12|	   COMPRA(numnf, codc, nomc, codv, nomv, dtcomp)
+     111 |  17  |  05  | João |Maria |10/07/12|		numnf -> codc nomc codv nomv ftcomp
+     34  |  11  |  05  | Onze |Maria |11/07/12|		
+ITENS
+ NUMNF|  CODP  |   NOMP  |   QTCOMP   | VLCOMP |
+    5 |   45   |  Porca  |     10     |  95.00 |    ITENS( numnf, codp, nomp, qtcomp, vlcomp)
+    5 |   16   |  Prego  |      5     |  15.00 |	numnf codp -> nomp qtcomp vlcomp
+  111 |   15   | Alicate |      1     |  63.10 |	codp -> nomp 
+  111 |   40   |  Arame  |     10     |  75.00 |
+  34  |   40   |  Arame  |      5     |  37.50 |
+
+     *2FN*
+COMPRA ta ok
+ITENS
+    NUMNF|  CODP  |   QTCOMP   | VLCOMP |  
+       5 |   45   |     10     |  95.00 |      ITENS(numnf, codp, qtcomp, vlcomp)
+       5 |   16   |      5     |  15.00 |	   numnf codp -> qtcomp vlcomp
+     111 |   15   |      1     |  63.10 |
+     111 |   40   |     10     |  75.00 |
+     34  |   40   |      5     |  37.50 |
+    
+PRODUTO  adiciona PRCP(preço do produto)
+  CODP  |   NOMP  | PRCP  |  	
+   45   |  Porca  |  9.50 |	  PRODTO(codp, nomp, prcp)
+   16   |  Prego  |  3.00 |		codp -> nomp prcp
+   15   | Alicate | 63.10 |
+   40   |  Arame  |  7.50 |
+
+ *BCNF*     
+altra COMPRA
+COMPRA
+    NUMNF| CODC | CODV | DTCOMP | 
+       5 |  11  |  33  |07/07/12|      COMPRA(numnf, codc, codv, dtcomp)
+       5 |  11  |  33  |07/07/12|	   numnf -> codc codv drcomp
+     111 |  17  |  05  |10/07/12|
+     111 |  17  |  05  |10/07/12|
+     34  |  11  |  05  |11/07/12|
+
+final ->  COMPRA(numnf, codc, codv, dtcomp)
+      ->  ITENS(numnf, codp, qtcomp, vlcomp)
+      ->  PRODUTO(codp, nomp, prcp)
+      ->  CLIENTE(codc, nomc)
+      ->  VENDEDOR(codv, nomv)

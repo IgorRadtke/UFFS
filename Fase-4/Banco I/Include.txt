@@ -1,0 +1,70 @@
+CREATE TABLE Nutricionista (
+    Email VARCHAR,
+    Nome VARCHAR,
+    Senha VARCHAR,
+    CFN VARCHAR,
+    constraint pk_Nutricionista primary key (CFN)
+);
+
+CREATE TABLE Cliente (
+    CodCli VARCHAR,
+    Nome VARCHAR,
+    Fone VARCHAR,
+    Email VARCHAR,
+    Senha VARCHAR,
+    DataNasc DATE,
+    CFN VARCHAR,
+    constraint fk_Cliente_Nutricionista foreign key (CFN) references Nutricionista(CFN),
+    constraint pk_Cliente primary key (CodCli)
+
+);
+
+CREATE TABLE Avaliacao (
+    CPF VARCHAR,
+    Toma_Med VARCHAR,
+    Doencas VARCHAR,
+    Lesoes VARCHAR,
+    Tipo_Fisico VARCHAR,
+    Objetivo VARCHAR,
+    CFN VARCHAR,    
+    constraint pk_Avaliacao primary key (CPF),
+    constraint fk_Avaliacao_Cliente foreign key (CPF) references Cliente(CodCli),
+    constraint fk_Avaliacao_Nutricionista foreign key (CFN) references Nutricionista(CFN)
+
+);
+
+CREATE TABLE Treino (
+    CPF VARCHAR,
+    CFN VARCHAR,
+    Peso FLOAT,
+    Repeticoes INTEGER,
+    Exercicios VARCHAR,
+    constraint pk_Treino primary key (CPF),
+    constraint fk_Treino_Cliente foreign key (CPF) references Cliente(CodCli),
+    constraint fk_Treino_Nutricionista foreign key (CFN) references Nutricionista(CFN)
+);
+
+CREATE TABLE Refeicoes (
+    CPF VARCHAR,
+    CFN VARCHAR,
+    Cafe VARCHAR,
+    Almoco VARCHAR,
+    Janta VARCHAR,
+    Lanche VARCHAR,
+    constraint pk_Refeicoes primary key (CPF),
+    constraint fk_Refeicoes_Cliente foreign key (CPF) references Cliente(CodCli),
+    constraint fk_Refeicoes_Nutricionista foreign key (CFN) references Nutricionista(CFN)
+);
+
+CREATE TABLE Medidas (
+    CPF VARCHAR,
+    BF FLOAT,
+    IMC FLOAT,
+    Medida_Coxa FLOAT,
+    Medida_Braco FLOAT,
+    Medida_Torax FLOAT,
+    Peso INTEGER,
+    DataRes DATE,
+    constraint pk_Medidas primary key (CPF),
+    constraint fk_Medidas_Cliente foreign key (CPF) references Cliente(CodCli)
+);
